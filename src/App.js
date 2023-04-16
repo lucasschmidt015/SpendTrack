@@ -1,12 +1,14 @@
 import './Global.css';
+import { BrowserRouter } from 'react-router-dom';
+import AllRoutes from './Routes/Routes';
 import Dashboard from "./Pages/Dashboard";
 
 
 export default function App(){
   return(
-    <div>
-      <h1>Hello World</h1>
+    <BrowserRouter>
+      <AllRoutes/>
         <Dashboard />
-    </div>
+    </BrowserRouter>
   );
 }
