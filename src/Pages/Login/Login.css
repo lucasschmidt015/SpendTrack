@@ -1,0 +1,24 @@
+.loginbox{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.loginbox h1{
+    position: relative;
+}
+
+.BackgroundImage{
+    position: fixed;
+    width: 100%;
+    height: 45%;
+    padding: 10px 10px 0 10px;
+}
+
+.BackgroundImage img{
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+}
