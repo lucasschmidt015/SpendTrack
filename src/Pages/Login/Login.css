@@ -1,20 +1,16 @@
 .loginbox{
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    
-}
-
-.loginbox h1{
-    position: relative;
 }
 
 .BackgroundImage{
-    position: fixed;
     width: 100%;
     height: 45%;
     padding: 10px 10px 0 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    color: #fff;
 }
 
 .BackgroundImage img{
@@ -22,3 +18,42 @@
     height: 100%;
     border-radius: 7px;
 }
+
+.first-line {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 70px;
+    z-index: 1;
+}
+
+.first-line button{
+    border-radius: 15px;
+    border: none;
+    padding: 7px 22px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #fff;
+    background-image: linear-gradient(to right, rgb(250, 11, 122), rgb(242, 14, 250));
+}
+
+.rodapes{
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rodapes label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodapes label svg{
+    margin-left: 7px;
+    font-size: 15px;
+}
+
+
