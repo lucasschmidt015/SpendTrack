@@ -15,9 +15,14 @@ export default function Login(){
                         <label>Ecommerce<BsChevronDown/></label>
                         <label>Docs<BsChevronDown/></label>
                    </div>
-                   <button>BUYNOW</button>
+                   <button>BUY NOW</button>
+                </div>
+                <div className="Mensagem-meio">
+                    <h1>Welcome!</h1>
+                    <p>Use these awesome forms to login or create new account in your project for free</p>
                 </div>
             </div>
         </div>
     );
 }
+                
