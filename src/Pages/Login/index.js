@@ -41,6 +41,11 @@ export default function Login(){
                         <input id="switch" type="checkbox"/> 
                         <label for="switch">Remember me</label>
                     </div>
+                    <div className="buttons-send">
+                        <button>SIGN IN</button>
+                        <label>Or</label>
+                        <button>SIGN IN</button>
+                    </div>
                 </div>
             </div>
         </div>
