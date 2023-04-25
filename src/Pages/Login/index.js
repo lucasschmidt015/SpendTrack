@@ -1,19 +1,29 @@
 import "./Login.css"
 import BgImg from "../../Resources/BackgroundLogin.jpg"
-import { BsChevronDown } from 'react-icons/bs'
+import { BsChevronDown, BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs'
 import { FaFacebook } from 'react-icons/fa'
 import { DiApple } from 'react-icons/di'
 import { FcGoogle } from 'react-icons/fc'
+import { IoMdFootball } from 'react-icons/io'
+import { SiThingiverse } from 'react-icons/si'
+
+
+import { useState } from "react"
 
 
 export default function Login(){
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+
     return(
         <div className="loginbox">
             <div className="BackgroundImage">
                 <img src={BgImg} alt=""/>
                 <div className="first-line">
                    <h3>Spend Track Sinten</h3>
-                   <div className="rodapes">
+                   <div className="options">
                         <label>Pages<BsChevronDown/></label>
                         <label>Authentication<BsChevronDown/></label>
                         <label>Ecommerce<BsChevronDown/></label>
@@ -34,8 +44,8 @@ export default function Login(){
                         <FcGoogle/>
                     </div>
                     <div className="input-area">
-                        <input type="text" placeholder="Email"/>
-                        <input type="password" placeholder="Password"/>
+                        <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </div>
                     <div className="remember-button">
                         <input id="switch" type="checkbox"/> 
@@ -46,6 +56,24 @@ export default function Login(){
                         <label>Or</label>
                         <button>SIGN IN</button>
                     </div>
+                </div>
+
+            </div>
+            <div className="rodape">
+                <div className="rodape-firstline">
+                    <p>Company</p>
+                    <p>About Us</p>
+                    <p>Team</p>
+                    <p>Products</p>
+                    <p>Blog</p>
+                    <p>Pricing</p>
+                </div>
+                <div className="rodape-secondline">
+                    <IoMdFootball/>
+                    <BsTwitter/>
+                    <BsInstagram/>
+                    <SiThingiverse/>
+                    <BsGithub/>
                 </div>
             </div>
         </div>

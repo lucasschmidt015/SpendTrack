@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
+    position: absolute;
     color: #fff;
 }
 
@@ -27,8 +27,9 @@
     position: absolute;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
-    padding: 20px 70px;
+    padding: 18px 70px;
     z-index: 1;
 }
 
@@ -39,35 +40,44 @@
     font-weight: bold;
     font-size: 13px;
     color: #FFF;
+    transition: ease 0.5s;
     background-image: linear-gradient(to right, rgb(250, 11, 122), rgb(242, 14, 250));
 }
 
 .first-line button:hover{
     font-size: 14px;  
+    background-image: linear-gradient(to right, rgb(235, 10, 115), rgb(222, 10, 230));
 }
 
-.rodapes{
+.options{
     display: flex;
-    width: 50%;
+    width: 40%;
     font-size: 12px;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    left: 32%;
 }
 
-.rodapes label{
+.options label{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.rodapes label svg{
+.options label:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.options label svg{
     margin-left: 7px;
     font-size: 15px;
 }
 
 .Mensagem-meio{
     position: absolute;
-    padding: 80px 0px;   
+    padding: 85px 0px;   
     width: 39%;
     display: flex;
     flex-direction: column;   
@@ -91,7 +101,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 50%;
+    top: 65%;
 }
 
 
@@ -114,13 +124,18 @@
     padding: 10px;
     border-radius: 9px;
     border: 1px solid rgb(230, 227, 227);
+    transition: ease 0.5s;
+}
+
+.input-area input:hover{
+    border: 1px solid rgb(182, 181, 181);
 }
 
 .login-icons{
     width: 100%;
     display: flex;
     justify-content: space-around;
-    padding: 0 35px
+    padding: 0 35px;
 }
 
 .login-icons svg{
@@ -128,8 +143,14 @@
     border-radius: 5px;
     font-size: 25px;
     width: 50px;
-    color: black;
     height: 40px;
+    color: black;
+    transition: ease 0.5s;
+}
+
+.login-icons svg:hover{
+    cursor: pointer;
+    border: 1px solid rgb(187, 186, 186);
 }
 
 .login-icons svg:first-child{
@@ -144,6 +165,11 @@
 }
 .remember-button input{
     margin-right: 10px;
+    cursor: pointer;
+}
+
+.remember-button label{
+    cursor: pointer;
 }
 
 .buttons-send{
@@ -169,4 +195,30 @@
 
 .buttons-send button:first-child{
     background-image: linear-gradient(to right, rgb(65, 195, 255), rgb(1, 122, 179));
+}
+
+
+.rodape{
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: rgb(141, 138, 138);
+    padding-bottom: 15px;
+}
+
+.rodape-firstline{
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.rodape-secondline{
+    width: 25%;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 35px;
 }
