@@ -222,3 +222,25 @@
     justify-content: space-around;
     padding-top: 35px;
 }
+
+
+@media screen and (max-height: 800px) {
+    .login-container{
+        width: 280px;
+        height: 380px;
+        top: 60%;
+    }   
+
+    .login-container h2{
+        padding: 22px 0;
+    }   
+
+    .buttons-send{
+        height: 115px;
+        padding-top: 23px;
+    }
+    
+    .Mensagem-meio h1{
+        font-size: 32px;
+    }
+}
