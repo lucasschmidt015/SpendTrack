@@ -224,6 +224,17 @@
 }
 
 
+@media screen and (max-width: 300px) {
+
+    .first-line{
+        
+    }
+
+    .options{
+        display: none;
+    }
+}
+
 @media screen and (max-height: 800px) {
     .login-container{
         width: 280px;

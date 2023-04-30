@@ -8,7 +8,7 @@ export default function App(){
   return(
     <BrowserRouter>
       <AllRoutes/>
-        <Dashboard />
+        {/* <Dashboard /> */}
     </BrowserRouter>
   );
 }
