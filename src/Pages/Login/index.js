@@ -15,6 +15,11 @@ export default function Login(){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [saveLogin, setSaveLogin] = useState(false);
+
+    function request(href){
+        window.open(href, '_blank')
+    }
 
     return(
         <div className="loginbox">
@@ -47,7 +52,7 @@ export default function Login(){
                         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </div>
                     <div className="remember-button">
-                        <input id="switch" type="checkbox"/> 
+                        <input id="switch" type="checkbox" value={saveLogin} onChange={(e) => setSaveLogin(e.target.value)}/> 
                         <label for="switch">Remember me</label>
                     </div>
                     <div className="buttons-send">
@@ -72,7 +77,7 @@ export default function Login(){
                     <BsTwitter/>
                     <BsInstagram/>
                     <SiThingiverse/>
-                    <BsGithub/>
+                    <BsGithub onClick={() => request("https://github.com/lucasschmidt015/SpendTrack")}/>
                 </div>
             </div>
         </div>

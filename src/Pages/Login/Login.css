@@ -223,6 +223,10 @@
     padding-top: 35px;
 }
 
+.rodape-secondline svg{
+    cursor: pointer;
+}
+
 
 @media screen and (max-width: 700px) {
 
@@ -290,7 +294,17 @@
     }
 }
 
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 650px) {
+    .Mensagem-meio p {
+        display: none;
+    }
+
+    .rodape-firstline {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 800px) {
     .login-container{
         width: 280px;
         height: 380px;
