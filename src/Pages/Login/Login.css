@@ -224,7 +224,7 @@
 }
 
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 700px) {
 
     .BackgroundImage {
         width: 100%;
@@ -272,9 +272,25 @@
     .Mensagem-meio p {
         display: none;
     }
+
+    .rodape{
+        padding-bottom: 35px;
+    }
+
+    .rodape-firstline {
+        display: none;
+    }
+
+    .rodape-secondline {
+        width: 80%;
+        font-size: 20px;
+        display: flex;
+        justify-content: space-around;
+        padding-top: 0px;
+    }
 }
 
-@media screen and (max-height: 800px) {
+@media screen and (max-height: 600px) {
     .login-container{
         width: 280px;
         height: 380px;
