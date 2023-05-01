@@ -7,7 +7,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { IoMdFootball } from 'react-icons/io'
 import { SiThingiverse } from 'react-icons/si'
 
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs, getDoc } from "firebase/firestore"
 
 import { useState, useEffect } from "react"
 
@@ -19,18 +19,21 @@ export default function Login(){
     const [password, setPassword] = useState('');
     const [saveLogin, setSaveLogin] = useState(false);
 
-    const myCollection = collection(webDB, "Teste");
-
+    //Tudo nesse
     useEffect(() => {
         async function Teste() {
-            await getDocs(myCollection)
-            .then((snapshot) => {
-                console.log(snapshot);
-            })
-            .catch(() => {
-                console.log("Algo deu errado");
-            })
-    
+             await getDocs(collection(webDB, "Users"))
+             .then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    console.log(doc.id);
+                    console.log(doc.data().Idade);
+                    console.log(doc.data().Nome);
+                })
+
+             })
+             .catch(() => {
+                console.log("Deu erro");
+             })
         }
 
         Teste();
