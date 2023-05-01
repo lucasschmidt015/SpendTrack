@@ -7,15 +7,34 @@ import { FcGoogle } from 'react-icons/fc'
 import { IoMdFootball } from 'react-icons/io'
 import { SiThingiverse } from 'react-icons/si'
 
+import { collection, getDocs } from "firebase/firestore"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
+import webDB from "../../Services/FirebaseConnection"
 
 export default function Login(){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [saveLogin, setSaveLogin] = useState(false);
+
+    const myCollection = collection(webDB, "Teste");
+
+    useEffect(() => {
+        async function Teste() {
+            await getDocs(myCollection)
+            .then((snapshot) => {
+                console.log(snapshot);
+            })
+            .catch(() => {
+                console.log("Algo deu errado");
+            })
+    
+        }
+
+        Teste();
+    }, []);
 
     function request(href){
         window.open(href, '_blank')
