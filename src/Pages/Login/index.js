@@ -11,7 +11,7 @@ import { collection, getDocs, getDoc } from "firebase/firestore"
 
 import { useState, useEffect } from "react"
 
-import webDB from "../../Services/FirebaseConnection"
+import { webDB, auth } from "../../Services/FirebaseConnection"
 
 export default function Login(){
 
