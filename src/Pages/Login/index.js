@@ -7,11 +7,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { IoMdFootball } from 'react-icons/io'
 import { SiThingiverse } from 'react-icons/si'
 
-import { collection, getDocs, getDoc } from "firebase/firestore"
-
-import { useState, useEffect } from "react"
-
-import { webDB, auth } from "../../Services/FirebaseConnection"
+import { useState } from "react"
 
 export default function Login(){
 
@@ -20,24 +16,24 @@ export default function Login(){
     const [saveLogin, setSaveLogin] = useState(false);
 
     //Tudo nesse
-    useEffect(() => {
-        async function Teste() {
-             await getDocs(collection(webDB, "Users"))
-             .then((snapshot) => {
-                snapshot.forEach((doc) => {
-                    console.log(doc.id);
-                    console.log(doc.data().Idade);
-                    console.log(doc.data().Nome);
-                })
+    // useEffect(() => {
+    //     async function Teste() {
+    //          await getDocs(collection(webDB, "Users"))
+    //          .then((snapshot) => {
+    //             snapshot.forEach((doc) => {
+    //                 console.log(doc.id);
+    //                 console.log(doc.data().Idade);
+    //                 console.log(doc.data().Nome);
+    //             })
 
-             })
-             .catch(() => {
-                console.log("Deu erro");
-             })
-        }
+    //          })
+    //          .catch(() => {
+    //             console.log("Deu erro");
+    //          })
+    //     }
 
-        Teste();
-    }, []);
+    //     Teste();
+    // }, []);
 
     function request(href){
         window.open(href, '_blank')
