@@ -1,3 +1,6 @@
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 import "./Login.css"
 import BgImg from "../../Resources/BackgroundLogin.jpg"
 import { BsChevronDown, BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs'
@@ -7,13 +10,13 @@ import { FcGoogle } from 'react-icons/fc'
 import { IoMdFootball } from 'react-icons/io'
 import { SiThingiverse } from 'react-icons/si'
 
-import { useState } from "react"
-
 export default function Login(){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [saveLogin, setSaveLogin] = useState(false);
+
+    const Nav = useNavigate();
 
     //Tudo nesse
     // useEffect(() => {
@@ -76,7 +79,7 @@ export default function Login(){
                     <div className="buttons-send">
                         <button>SIGN IN</button>
                         <label>Or</label>
-                        <button>SIGN IN</button>
+                        <button onClick={() => Nav('/signup')}>SIGN UP</button>
                     </div>
                 </div>
 
