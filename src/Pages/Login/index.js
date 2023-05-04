@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 import "./Login.css"
 import BgImg from "../../Resources/BackgroundLogin.jpg"
@@ -42,6 +43,16 @@ export default function Login(){
         window.open(href, '_blank')
     }
 
+    function handleLogin(){
+        if (email !== '' && password !== ''){
+            toast.success("Registered successfully.");
+            return;
+        } else {
+            toast.error("Fill in all the fields.");
+            return
+        }
+    }
+
     return(
         <div className="loginbox">
             <div className="BackgroundImage">
@@ -77,7 +88,7 @@ export default function Login(){
                         <label for="switch">Remember me</label>
                     </div>
                     <div className="buttons-send">
-                        <button>SIGN IN</button>
+                        <button onClick={handleLogin}>SIGN IN</button>
                         <label>Or</label>
                         <button onClick={() => Nav('/signup')}>SIGN UP</button>
                     </div>

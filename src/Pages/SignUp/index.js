@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 import './SignUp.css'
 import BgImg from "../../Resources/BackgroundLogin.jpg"
@@ -19,6 +20,16 @@ export default function SignUp(){
 
     function request(href){
         window.open(href, '_blank')
+    }
+
+    function handleSignUp(){
+        if (name !== '' && email !== '' && password !== '' && confirmPassword !== ''){
+            toast.success("Registered successfully.");
+            return;
+        } else {
+            toast.error("Fill in all the fields.");
+            return
+        }
     }
 
     return(
@@ -50,7 +61,7 @@ export default function SignUp(){
                         <input type="password" placeholder="Confirm Your Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
                     </div>
                     <div className="buttons-send-signup">
-                        <button>SIGN UP</button>
+                        <button onClick={handleSignUp}>SIGN UP</button>
                         <label>Or</label>
                         <button onClick={() => Nav('/')}>SIGN IN</button>
                     </div>
