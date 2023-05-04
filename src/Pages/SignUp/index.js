@@ -40,16 +40,16 @@ export default function SignUp(){
                     <p>Use these awesome forms to login or create new account in your project for free</p>
                 </div>
 
-                <div className="login-container">
+                <div className="login-container-signup">
                     <h2>Sign Up</h2>
                     
-                    <div className="input-area">
+                    <div className="input-area-signup">
                         <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
                         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                         <input type="password" placeholder="Confirm Your Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
                     </div>
-                    <div className="buttons-send">
+                    <div className="buttons-send-signup">
                         <button>SIGN UP</button>
                         <label>Or</label>
                         <button onClick={() => Nav('/')}>SIGN IN</button>

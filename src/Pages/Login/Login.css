@@ -93,7 +93,7 @@
 
 .login-container{
     position: absolute;
-    width: 280px;
+    width: 310px;
     height: 420px;
     background-color: #FFF;
     color: rgb(122, 120, 120);
@@ -120,7 +120,7 @@
 }
 
 .input-area input{
-    width: 85%;
+    width: 88%;
     padding: 10px;
     border-radius: 9px;
     border: 1px solid rgb(230, 227, 227);
@@ -159,7 +159,7 @@
 
 .remember-button{
     padding-top: 15px;
-    width: 85%;
+    width: 88%;
     display: flex;
     align-items: center;
 }
@@ -183,7 +183,7 @@
 }
 
 .buttons-send button{
-    width: 85%;
+    width: 88%;
     height: 30px;
     border: 0;
     font-size: 12px;
