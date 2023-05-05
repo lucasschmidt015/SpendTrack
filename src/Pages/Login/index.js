@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { useDispatch } from "react-redux"
 
 import "./Login.css"
 import BgImg from "../../Resources/BackgroundLogin.jpg"
@@ -12,6 +13,8 @@ import { IoMdFootball } from 'react-icons/io'
 import { SiThingiverse } from 'react-icons/si'
 
 export default function Login(){
+
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -45,8 +48,10 @@ export default function Login(){
 
     function handleLogin(){
         if (email !== '' && password !== ''){
-            toast.success("Registered successfully.");
-            return;
+            dispatch({
+                type: 'HANDLE_LOGIN',
+                user: { email, password }
+            });
         } else {
             toast.error("Fill in all the fields.");
             return

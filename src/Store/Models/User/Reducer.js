@@ -1,5 +1,5 @@
 import { auth, webDB } from "../../../Services/FirebaseConnection";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
@@ -44,9 +44,26 @@ export default function user(state = [], action) {
         return [...state, action.user]
     }
 
+    async function handleLogin(){
+        const Email = action.user.email;
+        const Password = action.user.password;
+
+        await signInWithEmailAndPassword(auth, Email, Password)
+        .then((success) => {
+            const loggedUser = success.user;
+            return [];
+        })
+        .catch((error) => {
+            console.log("Error");
+            return state;
+        })
+    }
+
     switch(action.type){
         case 'HANDLE_SIGNUP':
             return handleSignUp();
+        case 'HANDLE_LOGIN':
+            return handleLogin();            
         default:
             return state;
     }
