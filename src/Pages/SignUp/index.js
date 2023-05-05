@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { toast } from "react-toastify"
 
 import './SignUp.css'
@@ -10,6 +11,8 @@ import { SiThingiverse } from 'react-icons/si'
 
 
 export default function SignUp(){
+
+    const dispatch = useDispatch();
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -25,11 +28,13 @@ export default function SignUp(){
     //Isso aqui provavelmente nem vai ficar aqui, quando tiver terminado a configuração do redux mover pra lá
     function handleSignUp(){
         if (name !== '' && email !== '' && password !== '' && confirmPassword !== ''){
-            toast.success("Registered successfully.");
-            return;
+            dispatch({
+                type: 'HANDLE_SIGNUP',
+                user: { name, email, password }
+            })
+            
         } else {
             toast.error("Fill in all the fields.");
-            return
         }
     }
 
