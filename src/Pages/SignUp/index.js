@@ -25,7 +25,6 @@ export default function SignUp(){
         window.open(href, '_blank')
     }
 
-    //Isso aqui provavelmente nem vai ficar aqui, quando tiver terminado a configuração do redux mover pra lá
     function handleSignUp(){
         if (name !== '' && email !== '' && password !== '' && confirmPassword !== ''){
             dispatch({

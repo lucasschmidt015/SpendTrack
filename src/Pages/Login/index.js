@@ -22,26 +22,6 @@ export default function Login(){
 
     const Nav = useNavigate();
 
-    //Tudo nesse
-    // useEffect(() => {
-    //     async function Teste() {
-    //          await getDocs(collection(webDB, "Users"))
-    //          .then((snapshot) => {
-    //             snapshot.forEach((doc) => {
-    //                 console.log(doc.id);
-    //                 console.log(doc.data().Idade);
-    //                 console.log(doc.data().Nome);
-    //             })
-
-    //          })
-    //          .catch(() => {
-    //             console.log("Deu erro");
-    //          })
-    //     }
-
-    //     Teste();
-    // }, []);
-
     function request(href){
         window.open(href, '_blank')
     }
@@ -50,7 +30,7 @@ export default function Login(){
         if (email !== '' && password !== ''){
             dispatch({
                 type: 'HANDLE_LOGIN',
-                user: { email, password }
+                user: { email, password },
             });
         } else {
             toast.error("Fill in all the fields.");

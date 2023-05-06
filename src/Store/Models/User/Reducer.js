@@ -1,15 +1,14 @@
 import { auth, webDB } from "../../../Services/FirebaseConnection";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 export default function user(state = [], action) {
-    //console.log(action);
 
     if (!state.length){
         const searchUserLocal = localStorage.getItem('@user');
         if (searchUserLocal){
-            return [...state, JSON.parse(searchUserLocal)];
+            return [JSON.parse(searchUserLocal)];
         }
     }
 
@@ -49,12 +48,19 @@ export default function user(state = [], action) {
         const Password = action.user.password;
 
         await signInWithEmailAndPassword(auth, Email, Password)
-        .then((success) => {
-            const loggedUser = success.user;
-            return [];
+        .then(async (success) => {
+            const userSnapshot = await getDoc(doc(webDB, 'Users', success.user.uid));
+            const newUser = {
+                uid: success.user.uid,
+                name: userSnapshot.data().Name, 
+                Email: userSnapshot.data().Email,
+            };
+            localStorage.setItem("@user", JSON.stringify(newUser));
+            toast.success("Login successful!");
+            return [newUser];
         })
         .catch((error) => {
-            console.log("Error");
+            console.log(error);
             return state;
         })
     }

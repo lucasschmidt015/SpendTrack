@@ -1,7 +1,11 @@
 import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function ConfigRoutes({LoggedComponent, defaultComponent, isPrivate}){
-    const isLoged = true;
+
+    const userInfo = useSelector(state => state.user);
+
+    const isLoged = userInfo.length > 0;
     const loading = false;
 
     if (loading) {
@@ -15,10 +19,6 @@ export default function ConfigRoutes({LoggedComponent, defaultComponent, isPriva
     if (!isLoged && isPrivate) {
         return <Navigate to="/"/>
     }
-
-    // if (isLoged && !isPrivate) {
-    //     return <Navigate to="/dashboard"/>
-    // }
 
     return isLoged ? LoggedComponent : defaultComponent;
 }
