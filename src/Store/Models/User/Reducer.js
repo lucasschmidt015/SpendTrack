@@ -65,11 +65,18 @@ export default function user(state = [], action) {
         })
     }
 
+    function handleSignOut(){
+        localStorage.removeItem('@user');
+        return [];
+    }
+
     switch(action.type){
         case 'HANDLE_SIGNUP':
             return handleSignUp();
         case 'HANDLE_LOGIN':
             return handleLogin();            
+        case 'HANDLE_SIGNOUT':
+            return handleSignOut();
         default:
             return state;
     }
