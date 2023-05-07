@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { MdDashboard } from 'react-icons/md';
 import { FiMenu } from 'react-icons/fi';
+import { AiFillDollarCircle } from 'react-icons/ai';
+import { BsFillGearFill, BsFillFileBarGraphFill } from 'react-icons/bs';
 import { ImExit } from 'react-icons/im';
 
 export default function Sidebar() {
@@ -40,15 +42,15 @@ export default function Sidebar() {
           {showDescriptions && <p>Dashboard</p>}         
         </div>
         <div className='buttom-module'>
-          {showDescriptions ? <MdDashboard style={{marginRight: '60px'}}/> : <MdDashboard/>}
+          {showDescriptions ? <AiFillDollarCircle style={{marginRight: '60px'}}/> : <AiFillDollarCircle/>}
           {showDescriptions && <p>Status</p>}         
         </div>
         <div className='buttom-module'>
-          {showDescriptions ? <MdDashboard style={{marginRight: '60px'}}/> : <MdDashboard/>}
-          {showDescriptions && <p>Dashboard</p>}         
+          {showDescriptions ? <BsFillFileBarGraphFill style={{marginRight: '60px'}}/> : <BsFillFileBarGraphFill/>}
+          {showDescriptions && <p>Report</p>}         
         </div>
         <div className='buttom-module'>
-          {showDescriptions ? <MdDashboard style={{marginRight: '60px'}}/> : <MdDashboard/>}
+          {showDescriptions ? <BsFillGearFill style={{marginRight: '60px'}}/> : <BsFillGearFill/>}
           {showDescriptions && <p>Options</p>}         
         </div>
         <div className='buttom-module' onClick={handleSignOut}>
