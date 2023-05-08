@@ -15,6 +15,9 @@ export default function Sidebar() {
   const nav = useNavigate();
   const sidebarInfo = useSelector(state => state.SidebarConf);
 
+  // Tentar ver como fica os consoles agora, tentei passar o dado default do reducer dentro de um objeto, precisa ver se funcionou
+  
+
   const [sidebarWidth, setSidebarWidth] = useState('60px');
   const [buttomHideMargin, setButtomHideMargim] = useState('62px');
   const [showDescriptions, setShowDescriptions] = useState(false);
@@ -46,8 +49,13 @@ export default function Sidebar() {
   }
   
   const setActiveModule = () => {
+    dispatch({
+      type: "Teste",
+      arg: "Teste",
+    });
+    
     const page = sidebarInfo.page;
-    //console.log(page)
+    console.log(page)
     //if (sidebarInfo != undefined){
     //  console.log('Entrou aqui <--------');
     //  const element = document.getElementById(page);
