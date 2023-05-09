@@ -1,0 +1,5 @@
+<--- Criar geração de PDF para relatórios
+
+<--- Criar uma integração com a API do dropbox para exportar ralatórios como pdf 
+
+<--- 

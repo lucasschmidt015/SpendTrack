@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import './Sidebar.css'
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import './Sidebar.css'
+import { handleSignOut } from '../../Store/Models/User/actions';
+import { setActivePage } from '../../Store/Models/SidebarConf/actions';
 
 import { MdDashboard } from 'react-icons/md';
 import { FiMenu } from 'react-icons/fi';
@@ -15,22 +18,12 @@ export default function Sidebar() {
   const nav = useNavigate();
   const sidebarInfo = useSelector(state => state.SidebarConf);
 
-  // Tentar ver como fica os consoles agora, tentei passar o dado default do reducer dentro de um objeto, precisa ver se funcionou
-  
-
   const [sidebarWidth, setSidebarWidth] = useState('60px');
   const [buttomHideMargin, setButtomHideMargim] = useState('62px');
   const [showDescriptions, setShowDescriptions] = useState(false);
 
-  useEffect(() => {
-    setActiveModule();
-  }, []);
-
-  function handleSignOut(){
-    dispatch({
-      type: 'HANDLE_SIGNOUT',
-      info: 'SignOut',
-    })
+  const handleExit = () => {
+    dispatch(handleSignOut());
     nav('/');
   }
 
@@ -41,26 +34,8 @@ export default function Sidebar() {
   }
 
   const handleChangePage = (page) => {
-    dispatch({
-      type: 'SET_ACTIVE_PAGE',
-      page: page,
-    })
+    dispatch(setActivePage(page))
     nav(`/${page}`);
-  }
-  
-  const setActiveModule = () => {
-    dispatch({
-      type: "Teste",
-      arg: "Teste",
-    });
-    
-    const page = sidebarInfo.page;
-    console.log(page)
-    //if (sidebarInfo != undefined){
-    //  console.log('Entrou aqui <--------');
-    //  const element = document.getElementById(page);
-    //  element.style.backgroundColor = '#1d1919';
-    //}
   }
 
  return (
@@ -84,7 +59,7 @@ export default function Sidebar() {
           {showDescriptions ? <BsFillGearFill style={{marginRight: '80px'}}/> : <BsFillGearFill/>}
           {showDescriptions && <p>Options</p>}         
         </div>
-        <div className='buttom-module' id='exit' onClick={handleSignOut}>
+        <div className='buttom-module' id='exit' onClick={handleExit}>
           {showDescriptions ? <ImExit style={{marginRight: '80px'}}/> : <ImExit/>}
           {showDescriptions && <p>Exit</p>}         
         </div>

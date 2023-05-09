@@ -4,6 +4,8 @@ import { toast } from "react-toastify"
 import { useDispatch } from "react-redux"
 
 import "./Login.css"
+import { handleLogin } from '../../Store/Models/User/actions';
+
 import BgImg from "../../Resources/BackgroundLogin.jpg"
 import { BsChevronDown, BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs'
 import { FaFacebook } from 'react-icons/fa'
@@ -26,12 +28,9 @@ export default function Login(){
         window.open(href, '_blank')
     }
 
-    function handleLogin(){
+    const handleSignIn = () => {
         if (email !== '' && password !== ''){
-            dispatch({
-                type: 'HANDLE_LOGIN',
-                user: { email, password },
-            });
+            dispatch(handleLogin(email, password));
         } else {
             toast.error("Fill in all the fields.");
             return
@@ -73,7 +72,7 @@ export default function Login(){
                         <label for="switch">Remember me</label>
                     </div>
                     <div className="buttons-send">
-                        <button onClick={handleLogin}>SIGN IN</button>
+                        <button onClick={handleSignIn}>SIGN IN</button>
                         <label>Or</label>
                         <button onClick={() => Nav('/signup')}>SIGN UP</button>
                     </div>

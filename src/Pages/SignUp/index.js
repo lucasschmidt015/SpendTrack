@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux"
 import { toast } from "react-toastify"
 
 import './SignUp.css'
+import { handleSignUp } from '../../Store/Models/User/actions';
+
 import BgImg from "../../Resources/BackgroundLogin.jpg"
 import { BsChevronDown, BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs'
 import { IoMdFootball } from 'react-icons/io'
@@ -25,13 +27,9 @@ export default function SignUp(){
         window.open(href, '_blank')
     }
 
-    function handleSignUp(){
+    function handleRegister(){
         if (name !== '' && email !== '' && password !== '' && confirmPassword !== ''){
-            dispatch({
-                type: 'HANDLE_SIGNUP',
-                user: { name, email, password }
-            })
-            
+            dispatch(handleSignUp(name, email, password));
         } else {
             toast.error("Fill in all the fields.");
         }
@@ -66,7 +64,7 @@ export default function SignUp(){
                         <input type="password" placeholder="Confirm Your Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
                     </div>
                     <div className="buttons-send-signup">
-                        <button onClick={handleSignUp}>SIGN UP</button>
+                        <button onClick={handleRegister}>SIGN UP</button>
                         <label>Or</label>
                         <button onClick={() => Nav('/')}>SIGN IN</button>
                     </div>
