@@ -1,4 +1,26 @@
 
+export function dispatchLogin(email, senha){
+    return {
+        type: 'DISPATCH_LOGIN',
+        email,
+        senha,
+    }
+}
+
+export function handleLoginSuccess(user){
+    return {
+        type: 'HANDLE_LOGIN',
+        user
+    }
+}
+
+export function handleLoginFail(error){
+    return {
+        type: 'HANDLE_ERROR',
+        error
+    }
+}
+
 export function handleLogin(email, password){
     return {
         type: 'HANDLE_LOGIN',
