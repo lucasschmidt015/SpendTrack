@@ -1,10 +1,14 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import { webDB, auth } from "../../../Services/FirebaseConnection";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { handleLoginSuccess, handleLoginFail } from "./actions";
 
-function* loginUser({email, senha}){
+
+function* loginUser({email, password}){
     try{
+        const response = yield call([auth, 'signInWithEmailAndPassword'], email, password);
+        console.log(response.user);
 
     } catch(error){
 
@@ -12,5 +16,5 @@ function* loginUser({email, senha}){
 }
 
 export default function* rootUser(){
-    takeLatest('DISPATCH_LOGIN', )
+    takeLatest('DISPATCH_LOGIN', loginUser)
 }
