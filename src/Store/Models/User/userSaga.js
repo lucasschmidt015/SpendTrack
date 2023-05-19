@@ -7,7 +7,6 @@ import { handleLoginSuccess, handleLoginFail } from "./actions";
 
 
 function* loginUser({email, password}){
-    console.log(`Called the method login user as email: ${email} | ${password}`)
     try{
         const responseAuth = yield call(signInWithEmailAndPassword, auth, email, password);
         const responseData = yield call(getDoc, doc(webDB, 'Users', responseAuth.user.uid))

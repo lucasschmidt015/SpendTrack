@@ -43,38 +43,25 @@ export default function user(state = [], action) {
         return [...state, action.user]
     }
 
-    async function handleLogin(){
-        const Email = action.user.email;
-        const Password = action.user.password;
-
-        await signInWithEmailAndPassword(auth, Email, Password)
-        .then(async (success) => {
-            const userSnapshot = await getDoc(doc(webDB, 'Users', success.user.uid));
-            const newUser = {
-                uid: success.user.uid,
-                name: userSnapshot.data().Name, 
-                Email: userSnapshot.data().Email,
-            };
-            localStorage.setItem("@user", JSON.stringify(newUser));
-            toast.success("Login successful!");
-            return [newUser];
-        })
-        .catch((error) => {
-            console.log(error);
-            return state;
-        })
-    }
-
     function handleSignOut(){
         localStorage.removeItem('@user');
         return [];
     }
 
+    function handleSuccessLogin(){
+        const user = action.user
+
+        localStorage.setItem("@user", JSON.stringify(user));
+        toast.success("Login successful!");
+
+        return [user];
+    }
+
     switch(action.type){
+        case 'HANDLE_LOGIN_SUCCESS':
+            return handleSuccessLogin();
         case 'HANDLE_SIGNUP':
             return handleSignUp();
-        case 'HANDLE_LOGIN':
-            return handleLogin();            
         case 'HANDLE_SIGNOUT':
             return handleSignOut();
         default:

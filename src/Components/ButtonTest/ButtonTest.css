@@ -6,11 +6,12 @@ button{
     margin-top: 10px;
     font-weight: bold;
     font-size: 17px;
-    background-color: #FFF;
+    background-color: #ffffff38;
     transition: ease 0.2s;
+    color: #FFF;
 }
 
 button:hover{
-    background-color: #d8d5d5;
+    background-color: #ffffff6b;
     cursor: pointer;
 }

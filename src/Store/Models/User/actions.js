@@ -8,19 +8,17 @@ export function dispatchLogin(email, password){
 }
 
 export function handleLoginSuccess(user){
-    console.log('HandleLoginSucess')
-    console.log(user);
     return {
-        type: 'HANDLE_LOGIN',
+        type: 'HANDLE_LOGIN_SUCCESS',
         user
     }
 }
-
+ // Funcionou o meddleware no caso do login, agora é só implementar para o resto das actions
 export function handleLoginFail(error){
     console.log('HandleLoginFail')
     console.log(error);
     return {
-        type: 'HANDLE_ERROR',
+        type: 'HANDLE_LOGIN_FAIL',
         error
     }
 }

@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 import { useDispatch } from "react-redux"
 
 import "./Login.css"
-import { handleLogin } from '../../Store/Models/User/actions';
+import { dispatchLogin } from "../../Store/Models/User/actions"
 
 import BgImg from "../../Resources/BackgroundLogin.jpg"
 import { BsChevronDown, BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs'
@@ -30,7 +30,7 @@ export default function Login(){
 
     const handleSignIn = () => {
         if (email !== '' && password !== ''){
-            dispatch(handleLogin(email, password));
+            dispatch(dispatchLogin(email, password));
         } else {
             toast.error("Fill in all the fields.");
             return
