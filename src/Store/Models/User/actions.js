@@ -1,13 +1,15 @@
 
-export function dispatchLogin(email, senha){
+export function dispatchLogin(email, password){
     return {
         type: 'DISPATCH_LOGIN',
         email,
-        senha,
+        password,
     }
 }
 
 export function handleLoginSuccess(user){
+    console.log('HandleLoginSucess')
+    console.log(user);
     return {
         type: 'HANDLE_LOGIN',
         user
@@ -15,13 +17,15 @@ export function handleLoginSuccess(user){
 }
 
 export function handleLoginFail(error){
+    console.log('HandleLoginFail')
+    console.log(error);
     return {
         type: 'HANDLE_ERROR',
         error
     }
 }
 
-export function handleLogin(email, password){
+export function handleLogin(email, password){//Esse cara vai deixar de existir, precisa arrumar lá no rudecer
     return {
         type: 'HANDLE_LOGIN',
         user: { email, password },

@@ -1,3 +1,16 @@
-.button-test{
-    
+button{
+    width: 205px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 17px;
+    background-color: #FFF;
+    transition: ease 0.2s;
+}
+
+button:hover{
+    background-color: #d8d5d5;
+    cursor: pointer;
 }

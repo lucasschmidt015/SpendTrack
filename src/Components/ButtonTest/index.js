@@ -4,7 +4,7 @@ import './ButtonTest.css';
 
 export default function ButtonTest({func}) {
  return (
-   <div className='button-test'>
+   <div>
         <button onClick={func}>Test Button</button>
    </div>
  );
