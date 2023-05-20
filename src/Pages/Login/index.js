@@ -21,7 +21,7 @@ export default function Login(){
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [saveLogin, setSaveLogin] = useState(false);
+    const [passwordType, setPasswordType] = useState('password');
     
     const [ userInfo ] = useSelector(state => state.user);
 
@@ -81,7 +81,7 @@ export default function Login(){
                                onChange={(e) => setEmail(e.target.value)}
                                onFocus={handleOnChangeActiveInput}
                                />
-                        <input type="password"
+                        <input type={passwordType}
                                placeholder="Password" 
                                style={borderStyle} 
                                value={password} 
@@ -90,8 +90,8 @@ export default function Login(){
                                />
                     </div>
                     <div className="remember-button">
-                        <input id="switch" type="checkbox" value={saveLogin} onChange={(e) => setSaveLogin(e.target.value)}/> 
-                        <label for="switch">Remember me</label>
+                        <input id="switch" type="checkbox"  onClick={() => setPasswordType(passwordType === 'password' ? 'text' : 'password')}/> 
+                        <label for="switch">Show password</label>
                     </div>
                     <div className="buttons-send">
                         <button onClick={handleSignIn}>SIGN IN</button>

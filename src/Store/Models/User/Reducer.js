@@ -6,6 +6,13 @@ import { produce } from "immer";
 
 export default function user(state = [{User: null, isLogged: false, hasAuthError: false}], action) {
 
+    if (state[0].User == null){
+        const searchUser = localStorage.getItem('@user');
+        if (searchUser){
+            return [{ User: JSON.parse(searchUser), isLogged: true, hasAuthError: false }]            
+        }
+    }
+
     async function handleSignUp() {
         const Name = action.user.name;
         const Email = action.user.email;
