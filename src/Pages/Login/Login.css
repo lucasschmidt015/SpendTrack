@@ -123,13 +123,9 @@
     width: 88%;
     padding: 10px;
     border-radius: 9px;
-    border: 1px solid rgb(230, 227, 227);
     transition: ease 0.5s;
 }
 
-.input-area input:hover{
-    border: 1px solid rgb(182, 181, 181);
-}
 
 .login-icons{
     width: 100%;

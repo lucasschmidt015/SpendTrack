@@ -13,20 +13,17 @@ export function handleLoginSuccess(user){
         user
     }
 }
- // Funcionou o meddleware no caso do login, agora é só implementar para o resto das actions
+
 export function handleLoginFail(error){
-    console.log('HandleLoginFail')
-    console.log(error);
     return {
         type: 'HANDLE_LOGIN_FAIL',
         error
     }
 }
 
-export function handleLogin(email, password){//Esse cara vai deixar de existir, precisa arrumar lá no rudecer
+export function handleDisableError(){
     return {
-        type: 'HANDLE_LOGIN',
-        user: { email, password },
+        type: 'HANDLE_DISABLE_ERROR',
     }
 }
 

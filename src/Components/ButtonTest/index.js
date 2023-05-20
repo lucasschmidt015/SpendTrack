@@ -9,3 +9,6 @@ export default function ButtonTest({func}) {
    </div>
  );
 }
+
+
+{/* <ButtonTest func={() => dispatch(dispatchLogin('teste@teste.com', '123123'))}/> //Exemplo de como usar o componente*/}

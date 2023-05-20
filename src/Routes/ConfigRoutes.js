@@ -5,7 +5,7 @@ export default function ConfigRoutes({LoggedComponent, defaultComponent, isPriva
 
     const userInfo = useSelector(state => state.user);
 
-    const isLoged = userInfo.length > 0;
+    const isLoged = userInfo[0].User != null && userInfo[0].isLogged;
     const loading = false;
 
     if (loading) {

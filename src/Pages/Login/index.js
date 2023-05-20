@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import "./Login.css"
-import { dispatchLogin } from "../../Store/Models/User/actions"
+import { dispatchLogin, handleDisableError } from "../../Store/Models/User/actions"
 
 import BgImg from "../../Resources/BackgroundLogin.jpg"
 import { BsChevronDown, BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs'
@@ -17,14 +17,19 @@ import { SiThingiverse } from 'react-icons/si'
 export default function Login(){
 
     const dispatch = useDispatch();
-
+    const Nav = useNavigate();
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [saveLogin, setSaveLogin] = useState(false);
+    
+    const [ userInfo ] = useSelector(state => state.user);
 
-    const Nav = useNavigate();
-
-    function request(href){
+    const borderStyle = {
+        border: `1px solid ${userInfo.hasAuthError ? 'rgb(255, 0, 0)' : 'rgb(230, 227, 227)' }`,
+    }
+    
+    const request = (href) => {
         window.open(href, '_blank')
     }
 
@@ -35,6 +40,11 @@ export default function Login(){
             toast.error("Fill in all the fields.");
             return
         }
+    }
+
+    const handleOnChangeActiveInput = () => {
+        if (userInfo.hasAuthError)
+            dispatch(handleDisableError());
     }
 
     return(
@@ -64,8 +74,20 @@ export default function Login(){
                         <FcGoogle/>
                     </div>
                     <div className="input-area">
-                        <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                        <input type="text" 
+                               placeholder="Email" 
+                               style={borderStyle} 
+                               value={email} 
+                               onChange={(e) => setEmail(e.target.value)}
+                               onFocus={handleOnChangeActiveInput}
+                               />
+                        <input type="password"
+                               placeholder="Password" 
+                               style={borderStyle} 
+                               value={password} 
+                               onChange={(e) => setPassword(e.target.value)}
+                               onFocus={handleOnChangeActiveInput}
+                               />
                     </div>
                     <div className="remember-button">
                         <input id="switch" type="checkbox" value={saveLogin} onChange={(e) => setSaveLogin(e.target.value)}/> 
