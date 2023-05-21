@@ -59,6 +59,8 @@ export default function user(state = [{User: null, isLogged: false, hasAuthError
     }
 
     const handleSignOut = () => {
+
+    //Aqui precisa chamar a função de deslogar do firebase, talvez seja uma boa dar uma olhada na documentação sobre como percistir um login de forma correta
         localStorage.removeItem('@user');
         return [{User: null, isLogged: false, hasAuthError: false}];
     }
