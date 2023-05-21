@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { toast } from "react-toastify"
 
 import './SignUp.css'
-import { handleSignUp } from '../../Store/Models/User/actions';
+import { dispatchSignUp } from '../../Store/Models/User/actions';
 
 import BgImg from "../../Resources/BackgroundLogin.jpg"
 import { BsChevronDown, BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs'
@@ -13,14 +13,13 @@ import { SiThingiverse } from 'react-icons/si'
 
 
 export default function SignUp(){
-
-    const dispatch = useDispatch();
-
+    
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
+    
+    const dispatch = useDispatch();
     const Nav = useNavigate();
 
     function request(href){
@@ -28,11 +27,17 @@ export default function SignUp(){
     }
 
     function handleRegister(){
-        if (name !== '' && email !== '' && password !== '' && confirmPassword !== ''){
-            dispatch(handleSignUp(name, email, password));
-        } else {
+        if (name === '' || email === '' || password === '' || confirmPassword === ''){
             toast.error("Fill in all the fields.");
+            return;
         }
+
+        if (password !== confirmPassword){
+            toast.warn('The two passwords are diferents!');
+            return;
+        }
+
+        dispatch(dispatchSignUp(name, email, password));
     }
 
     return(

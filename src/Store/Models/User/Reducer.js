@@ -1,6 +1,3 @@
-import { auth, webDB } from "../../../Services/FirebaseConnection";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { produce } from "immer";
 
@@ -11,43 +8,7 @@ export default function user(state = [{User: null, isLogged: false, hasAuthError
         if (searchUser){
             return [{ User: JSON.parse(searchUser), isLogged: true, hasAuthError: false }]            
         }
-    }
-
-    async function handleSignUp() {
-        const Name = action.user.name;
-        const Email = action.user.email;
-        const Password = action.user.password;
-
-        await createUserWithEmailAndPassword(auth, Email, Password)
-        .then(async (userCredential) => {
-            await setDoc(doc(webDB, "Users", userCredential.user.uid), {
-                Name: Name,
-                Email: Email,
-            })
-            .then(()=>{
-                const newUser = {
-                    uid: userCredential.user.uid,
-                    name: Name, 
-                    Email: Email,
-                };
-                localStorage.setItem("@user", JSON.stringify(newUser));
-                toast.success("Successfully registered user!")  ;
-                return [newUser];
-            })
-            
-        })
-        .catch((error) => {
-            console.log(error);
-            toast.error("Somithing went wrong :( ");
-        })
-        
-        return [...state, action.user]
-    }
-
-    const handleSignOut = () => {
-        localStorage.removeItem('@user');
-        return [{User: null, isLogged: false, hasAuthError: false}];
-    }
+    }    
 
     const handleSuccessLogin = () => {
         const user = action.user
@@ -77,10 +38,29 @@ export default function user(state = [{User: null, isLogged: false, hasAuthError
         }
     }
 
+    const handleSuccessSignUp = () => {
+        const user = action.user
+
+        localStorage.setItem("@user", JSON.stringify(user));
+        toast.success("Successfully registered!");
+
+        return [{ User: user, isLogged: true, hasAuthError: false }];
+    }
+
+    const handleSignUpError = () => {
+        //Próximo passo é implementar aqui os tratamentos de erros de cadastro
+        return [{User: null, isLogged: false , hasAuthError: true}];
+    }
+
     const handleDisableError = () => {
         return produce(state, draft => {
             draft[0].hasAuthError = false;
         });
+    }
+
+    const handleSignOut = () => {
+        localStorage.removeItem('@user');
+        return [{User: null, isLogged: false, hasAuthError: false}];
     }
 
     switch(action.type){
@@ -88,10 +68,12 @@ export default function user(state = [{User: null, isLogged: false, hasAuthError
             return handleSuccessLogin();
         case 'HANDLE_LOGIN_FAIL':
             return handleLoginError();
+        case 'HANDLE_SIGNUP_SUCCESS':
+            return handleSuccessSignUp();    
+        case 'HANDLE_SIGNUP_ERROR':
+            return handleSignUpError();
         case 'HANDLE_DISABLE_ERROR':
             return handleDisableError();
-        case 'HANDLE_SIGNUP':
-            return handleSignUp();
         case 'HANDLE_SIGNOUT':
             return handleSignOut();
         default:
