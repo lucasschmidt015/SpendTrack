@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import { webDB, auth } from "../../../Services/FirebaseConnection";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithCustomToken } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 import { handleLoginSuccess, handleLoginFail, handleSignUpSuccess, handleSignUpFail } from "./actions";
@@ -49,7 +49,18 @@ function* signUpUser({name, email, password}){
     }
 }
 
+function* checkUserLoggedIn({ token }){
+    try{
+        const response = yield call(signInWithCustomToken, auth, token);       
+        console.log(`Deu Boa: ${response}`);
+
+    } catch (error) {
+        console.log(`Deu BO: ${error}`);
+    }
+}
+
 export default function* rootUser(){
     yield takeLatest('DISPATCH_LOGIN', loginUser)
     yield takeLatest('DISPATCH_SIGNUP', signUpUser)
+    yield takeLatest('DISPATCH_CHECK_USER', checkUserLoggedIn);
 }

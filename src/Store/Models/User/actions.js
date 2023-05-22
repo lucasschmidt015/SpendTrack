@@ -16,6 +16,16 @@ export function dispatchSignUp(name, email, password){
     }
 }
 
+export function dispatchCheckUser(token){
+    return {
+        type: 'DISPATCH_CHECK_USER',
+        token
+    }
+}
+
+
+
+
 export function handleLoginSuccess(user){
     return {
         type: 'HANDLE_LOGIN_SUCCESS',
@@ -43,6 +53,10 @@ export function handleSignUpFail(error){
         error
     }
 }
+
+
+
+
 
 export function handleDisableError(){
     return {
