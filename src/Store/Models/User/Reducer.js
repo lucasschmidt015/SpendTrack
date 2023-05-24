@@ -1,26 +1,12 @@
 import { toast } from "react-toastify";
 import { produce } from "immer";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../Services/FirebaseConnection";
 
 export default function user(state = [{User: null, isLogged: false, hasAuthError: false}], action) {
-
-    // if (state[0].User == null){
-    //     const hasAccessToken = localStorage.getItem('@accontToken');
-    //     if (hasAccessToken){
-    //         //Precisa dar um jeito de validar o token aqui, ou ver outra forma;
-    //         return [{ User: null, isLogged: true, hasAuthError: false }]            
-    //     }
-    // }    // Pelo que eu tava lendo sobre essa autenticação, talvez seja melhor gravar o token ao inves do usuário todo no localstorage - daí usaria o token toda vez que uma rota for carregada para verificar se possui login válido , dá pra implementar uma função e usar no inicio de cada componente, ou não toda tela, só na tela de login para carregar o usuário - tem que ver isso aí \
-
     const handleSuccessLogin = () => {
-        const user = {
-            uid: action.user.uid,
-            name: action.user.name,
-            Email: action.user.Email,
-        }
-
-        const token = action.user.Token;
+        const user = action.user;
         
-        localStorage.setItem("@accontToken", token);
         toast.success("Login successful!");
 
         return [{ User: user, isLogged: true, hasAuthError: false }];
@@ -46,15 +32,8 @@ export default function user(state = [{User: null, isLogged: false, hasAuthError
     }
 
     const handleSuccessSignUp = () => {
-        const user = {
-            uid: action.user.uid,
-            name: action.user.name,
-            Email: action.user.Email,
-        }
+        const user = action.user;
 
-        const token = action.user.Token;
-
-        localStorage.setItem("@accontToken", token);
         toast.success("Successfully registered!");
 
         return [{ User: user, isLogged: true, hasAuthError: false }];
@@ -72,8 +51,8 @@ export default function user(state = [{User: null, isLogged: false, hasAuthError
     }
 
     const handleSignOut = () => {
-        //Aqui precisa chamar a função de deslogar do firebase, talvez seja uma boa dar uma olhada na documentação sobre como percistir um login de forma correta
         localStorage.removeItem("@accontToken");
+        signOut(auth);
         return [{User: null, isLogged: false, hasAuthError: false}];
     }
 

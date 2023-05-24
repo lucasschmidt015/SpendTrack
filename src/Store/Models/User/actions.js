@@ -19,10 +19,8 @@ export function dispatchSignUp(name, email, password){
 export function dispatchCheckUser(token){
     return {
         type: 'DISPATCH_CHECK_USER',
-        token
     }
 }
-
 
 
 

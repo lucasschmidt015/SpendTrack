@@ -1,23 +1,19 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import { webDB, auth } from "../../../Services/FirebaseConnection";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithCustomToken } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 import { handleLoginSuccess, handleLoginFail, handleSignUpSuccess, handleSignUpFail } from "./actions";
-
-
 
 function* loginUser({email, password}){
     try{
         const responseAuth = yield call(signInWithEmailAndPassword, auth, email, password);
         const responseData = yield call(getDoc, doc(webDB, 'Users', responseAuth.user.uid))
-        const token = yield responseAuth.user.getIdToken();
 
         const loggedUser = {
             uid: responseAuth.user.uid,
             name: responseData.data().Name,
             Email: responseData.data().Email,
-            Token: token
         }
 
         yield put(handleLoginSuccess(loggedUser));
@@ -33,13 +29,10 @@ function* signUpUser({name, email, password}){
         
         yield call(setDoc, doc(webDB, "Users", responseSignUp.user.uid), { Name: name, Email: email });
 
-        const token = yield responseSignUp.user.getIdToken();
-
         const newUser = {
             uid: responseSignUp.user.uid,
             name: name,
             Email: email,
-            Token: token
         }
 
         yield put(handleSignUpSuccess(newUser));
@@ -49,14 +42,22 @@ function* signUpUser({name, email, password}){
     }
 }
 
-function* checkUserLoggedIn({ token }){
-    try{
-        const response = yield call(signInWithCustomToken, auth, token);       
-        console.log(`Deu Boa: ${response}`);
+function* checkUserLoggedIn(){
+    // try {
+    //     const userUid = auth.currentUser.uid;
+    //     const responseData = yield call(getDoc, doc(webDB, 'Users', userUid));
 
-    } catch (error) {
-        console.log(`Deu BO: ${error}`);
-    }
+    //     const loggedUser = {
+    //         uid: userUid,
+    //         name: responseData.data().Name,
+    //         Email: responseData.data().Email,
+    //     }
+
+    //     yield put(handleLoginSuccess(loggedUser));
+        
+    // } catch (error) {
+
+    // }
 }
 
 export default function* rootUser(){
