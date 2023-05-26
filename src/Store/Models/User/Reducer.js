@@ -3,13 +3,10 @@ import { produce } from "immer";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../Services/FirebaseConnection";
 
-export default function user(state = [{User: null, isLogged: false, hasAuthError: false}], action) {
+export default function user(state = [{isLogged: false, hasAuthError: false}], action) {
     const handleSuccessLogin = () => {
-        const user = action.user;
-        
         toast.success("Login successful!");
-
-        return [{ User: user, isLogged: true, hasAuthError: false }];
+        return [{isLogged: true, hasAuthError: false}];
     }
 
     const handleLoginError = () => {
@@ -18,30 +15,34 @@ export default function user(state = [{User: null, isLogged: false, hasAuthError
         switch (error){
             case 'Firebase: Error (auth/user-not-found).':
                 toast.error('Invalid Email or password.');
-                return [{User: null, isLogged: false , hasAuthError: true}];
+                return [{isLogged: false, hasAuthError: true}];
             case 'Firebase: Error (auth/invalid-email).':
                 toast.error('Invalid Email or password.');
-                return [{User: null, isLogged: false , hasAuthError: true}];
+                return [{isLogged: false, hasAuthError: true}];
             case 'Firebase: Error (auth/wrong-password).':
                 toast.error('Invalid password.');
-                return [{User: null, isLogged: false, hasAuthError: true}];
+                return [{isLogged: false, hasAuthError: true}];
             default:
                 toast.error('Something went wrong, please try again later.');
-                return [{User: null, isLogged: false, hasAuthError: false}];
+                return [{isLogged: false, hasAuthError: false}];
         }
     }
 
     const handleSuccessSignUp = () => {
-        const user = action.user;
-
         toast.success("Successfully registered!");
+        return [{isLogged: true, hasAuthError: false}];
+    }
 
-        return [{ User: user, isLogged: true, hasAuthError: false }];
+    const handleChangeLogin = () => {
+        const hasLogin = action.hasLogin;
+        return produce(state, draft => {
+            draft[0].isLogged = hasLogin;
+        });
     }
 
     const handleSignUpError = () => {
         //Próximo passo é implementar aqui os tratamentos de erros de cadastro
-        return [{User: null, isLogged: false , hasAuthError: true}];
+        return [{isLogged: false, hasAuthError: true}];
     }
 
     const handleDisableError = () => {
@@ -53,7 +54,7 @@ export default function user(state = [{User: null, isLogged: false, hasAuthError
     const handleSignOut = () => {
         localStorage.removeItem("@accontToken");
         signOut(auth);
-        return [{User: null, isLogged: false, hasAuthError: false}];
+        return [{isLogged: false, hasAuthError: false}];
     }
 
     switch(action.type){
@@ -65,6 +66,8 @@ export default function user(state = [{User: null, isLogged: false, hasAuthError
             return handleSuccessSignUp();    
         case 'HANDLE_SIGNUP_ERROR':
             return handleSignUpError();
+        case 'DISPATCH_HAS_LOGIN':
+            return handleChangeLogin();
         case 'HANDLE_DISABLE_ERROR':
             return handleDisableError();
         case 'HANDLE_SIGNOUT':

@@ -10,10 +10,9 @@ import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Services/FirebaseConnection";
 
-export default function AllRoutes(){
+import { dispatchHasLogin } from '../Store/Models/User/actions';
 
-    //A melhor abordagem que eu pensei agora seria tirar de vez o estado de usuário como ele é hoje, ao invés disso, ele será apenas um true o false que diz se o usuário está logado ou não, esse middleware será atualizado aqui nesse use effect
-    //Se vc precisar dos dados do usuário dentro da aplicação depois, vc pode chamar os motodos do firebase, ou tbm dava pra deixar algo meio pronto pra isso;
+export default function AllRoutes(){
 
     const dispatch = useDispatch();
 
@@ -23,19 +22,19 @@ export default function AllRoutes(){
                 if (user){
                     try{
                         await user.getIdToken(true);
-                        console.log('Tem usuário logado')
+                        dispatch(dispatchHasLogin(true));
                     } catch (error) {
-
+                        dispatch(dispatchHasLogin(false));
                     }
                 }
                 else{
-                    console.log("Usuário não logado<---------");
+                    dispatch(dispatchHasLogin(false));
                 }
             })
         }
 
         checkUser();
-    }, []);
+    }, [dispatch]);
 
     return (
         <Routes>

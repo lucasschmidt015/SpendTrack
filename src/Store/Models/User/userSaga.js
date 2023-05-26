@@ -42,26 +42,8 @@ function* signUpUser({name, email, password}){
     }
 }
 
-function* checkUserLoggedIn(){
-    // try {
-    //     const userUid = auth.currentUser.uid;
-    //     const responseData = yield call(getDoc, doc(webDB, 'Users', userUid));
-
-    //     const loggedUser = {
-    //         uid: userUid,
-    //         name: responseData.data().Name,
-    //         Email: responseData.data().Email,
-    //     }
-
-    //     yield put(handleLoginSuccess(loggedUser));
-        
-    // } catch (error) {
-
-    // }
-}
 
 export default function* rootUser(){
     yield takeLatest('DISPATCH_LOGIN', loginUser)
     yield takeLatest('DISPATCH_SIGNUP', signUpUser)
-    yield takeLatest('DISPATCH_CHECK_USER', checkUserLoggedIn);
 }
