@@ -41,8 +41,22 @@ export default function user(state = [{isLogged: false, hasAuthError: false}], a
     }
 
     const handleSignUpError = () => {
-        //Próximo passo é implementar aqui os tratamentos de erros de cadastro
-        return [{isLogged: false, hasAuthError: true}];
+        const error = action.error.message
+
+        switch(error) {
+            case 'Firebase: Error (auth/email-already-in-use).':
+                toast.error('The Email entered has already been registered for another user.');
+                return [{isLogged: false, hasAuthError: false}];
+            case 'Firebase: Error (auth/invalid-email).':
+                toast.error('The Email entered is invalid.');
+                return [{isLogged: false, hasAuthError: false}];
+            case 'Firebase: Password should be at least 6 characters (auth/weak-password).':
+                toast.error('Password must be 6 characters long.');
+                return [{isLogged: false, hasAuthError: false}];
+            default:
+                toast.error('Something went wrong, please try again later.');
+                return [{isLogged: false, hasAuthError: false}];
+        }
     }
 
     const handleDisableError = () => {
