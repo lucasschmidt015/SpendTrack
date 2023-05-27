@@ -1,6 +1,6 @@
-export function setActivePage(page){
+export function setActivePage(activePage){
     return {
         type: 'SET_ACTIVE_PAGE',
-        page: page,
+        activePage,
     }
 }

@@ -16,7 +16,8 @@ export default function Sidebar() {
 
   const dispatch = useDispatch();
   const nav = useNavigate();
-  const sidebarInfo = useSelector(state => state.SidebarConf);
+  
+  const sidebarInfo = useSelector(state => state.SidebarConf[0].activePage);
 
   const [sidebarWidth, setSidebarWidth] = useState('60px');
   const [buttomHideMargin, setButtomHideMargim] = useState('62px');
@@ -35,7 +36,7 @@ export default function Sidebar() {
 
   const handleChangePage = (page) => {
     dispatch(setActivePage(page))
-    nav(`/${page}`);
+    // nav(`/${page}`);
   }
 
  return (
@@ -43,19 +44,19 @@ export default function Sidebar() {
         <div className='buttom-hide' onClick={handleSidebarToggle} style={{marginLeft: buttomHideMargin}}>
           <FiMenu/>
         </div>
-        <div className='buttom-module' id='dashboard'>
+        <div className={sidebarInfo === 'home' ? 'buttom-module-active' : 'buttom-module'} id='dashboard' onClick={() => handleChangePage('home')}>
           {showDescriptions ? <MdDashboard style={{marginRight: '80px'}}/> : <MdDashboard/>}
           {showDescriptions && <p>Dashboard</p>}         
         </div>
-        <div className='buttom-module' id='status'>
+        <div className={sidebarInfo === 'status' ? 'buttom-module-active' : 'buttom-module'} id='status' onClick={() => handleChangePage('status')}>
           {showDescriptions ? <AiFillDollarCircle style={{marginRight: '80px'}}/> : <AiFillDollarCircle/>}
           {showDescriptions && <p>Status</p>}         
         </div>
-        <div className='buttom-module' id='report'>
+        <div className={sidebarInfo === 'report' ? 'buttom-module-active' : 'buttom-module'} id='report' onClick={() => handleChangePage('report')}>
           {showDescriptions ? <BsFillFileBarGraphFill style={{marginRight: '80px'}}/> : <BsFillFileBarGraphFill/>}
           {showDescriptions && <p>Report</p>}         
         </div>
-        <div className='buttom-module' id='options'>
+        <div className={sidebarInfo === 'options' ? 'buttom-module-active' : 'buttom-module'} id='options' onClick={() => handleChangePage('options')}>
           {showDescriptions ? <BsFillGearFill style={{marginRight: '80px'}}/> : <BsFillGearFill/>}
           {showDescriptions && <p>Options</p>}         
         </div>
