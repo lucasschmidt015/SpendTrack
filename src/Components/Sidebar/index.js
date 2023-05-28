@@ -30,7 +30,7 @@ export default function Sidebar() {
 
   const handleSidebarToggle = () => {
     setSidebarWidth(sidebarWidth === '60px' ? '200px' : '60px');
-    setButtomHideMargim(buttomHideMargin === '62px' ? '175px' : '62px');
+    setButtomHideMargim(buttomHideMargin === '62px' ? '200px' : '62px');
     setShowDescriptions(!showDescriptions);
   }
 
@@ -45,23 +45,23 @@ export default function Sidebar() {
           <FiMenu/>
         </div>
         <div className={sidebarInfo === 'home' ? 'buttom-module-active' : 'buttom-module'} id='dashboard' onClick={() => handleChangePage('home')}>
-          {showDescriptions ? <MdDashboard style={{marginRight: '80px'}}/> : <MdDashboard/>}
+          {showDescriptions ? <MdDashboard style={{marginRight: '100px'}}/> : <MdDashboard/>}
           {showDescriptions && <p>Dashboard</p>}         
         </div>
         <div className={sidebarInfo === 'status' ? 'buttom-module-active' : 'buttom-module'} id='status' onClick={() => handleChangePage('status')}>
-          {showDescriptions ? <AiFillDollarCircle style={{marginRight: '80px'}}/> : <AiFillDollarCircle/>}
+          {showDescriptions ? <AiFillDollarCircle style={{marginRight: '100px'}}/> : <AiFillDollarCircle/>}
           {showDescriptions && <p>Status</p>}         
         </div>
         <div className={sidebarInfo === 'report' ? 'buttom-module-active' : 'buttom-module'} id='report' onClick={() => handleChangePage('report')}>
-          {showDescriptions ? <BsFillFileBarGraphFill style={{marginRight: '80px'}}/> : <BsFillFileBarGraphFill/>}
+          {showDescriptions ? <BsFillFileBarGraphFill style={{marginRight: '100px'}}/> : <BsFillFileBarGraphFill/>}
           {showDescriptions && <p>Report</p>}         
         </div>
         <div className={sidebarInfo === 'options' ? 'buttom-module-active' : 'buttom-module'} id='options' onClick={() => handleChangePage('options')}>
-          {showDescriptions ? <BsFillGearFill style={{marginRight: '80px'}}/> : <BsFillGearFill/>}
+          {showDescriptions ? <BsFillGearFill style={{marginRight: '100px'}}/> : <BsFillGearFill/>}
           {showDescriptions && <p>Options</p>}         
         </div>
         <div className='buttom-module' id='exit' onClick={handleExit}>
-          {showDescriptions ? <ImExit style={{marginRight: '80px'}}/> : <ImExit/>}
+          {showDescriptions ? <ImExit style={{marginRight: '100px'}}/> : <ImExit/>}
           {showDescriptions && <p>Exit</p>}         
         </div>
         

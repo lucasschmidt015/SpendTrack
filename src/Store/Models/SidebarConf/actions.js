@@ -4,3 +4,9 @@ export function setActivePage(activePage){
         activePage,
     }
 }
+
+export function setSidebarActive(){
+    return {
+        type: "SET_SIDEBAR_ACTIVE"
+    }
+}

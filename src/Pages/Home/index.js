@@ -10,6 +10,22 @@ export default function Home() {
         <Sidebar/>
         <div className='reamaining-area'>
           <h1>Dashboard page</h1>
+          <div className='line-dashboard'>
+            <div className='dash-model'>
+
+            </div>
+            <div className='dash-model'>
+
+            </div>
+          </div>
+          <div className='line-dashboard'>
+            <div className='dash-model'>
+
+            </div>
+            <div className='dash-model'>
+
+            </div>
+          </div>
         </div>
    </div>
  );
