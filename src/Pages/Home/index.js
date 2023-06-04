@@ -59,7 +59,7 @@ export default function Home() {
                     <div className='objectives' key={object.id}>
                       <p id='Title'>{object.title}</p>
                       <p id='Percent'>{object.percentageAchieved}</p>
-                      <p id='Achieved'>{object.valueAchieved} / {object.valueObjective}</p>
+                      <p id='Achieved'>{object.valueAchieved}  /  {object.valueObjective}</p>
                       <div className='options-buttons'>
                         <AiFillEdit onClick={() => handleEdit(object.id)}/>
                         <FaTrash onClick={() => handleDelete(object.id)}/>
