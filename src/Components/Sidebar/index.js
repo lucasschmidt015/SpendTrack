@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import './Sidebar.css'
+//import './Sidebar.css'
+import { teste } from './styles.js';
 import { handleSignOut } from '../../Store/Models/User/actions';
 import { setActivePage } from '../../Store/Models/SidebarConf/actions';
 
@@ -40,7 +41,7 @@ export default function Sidebar() {
   }
 
  return (
-   <div className='sidebar' style={{width: sidebarWidth}}>      
+   <sidebarStyle style={{width: sidebarWidth}}>      
         <div className='buttom-hide' onClick={handleSidebarToggle} style={{marginLeft: buttomHideMargin}}>
           <FiMenu/>
         </div>
@@ -65,6 +66,6 @@ export default function Sidebar() {
           {showDescriptions && <p>Exit</p>}         
         </div>
         
-   </div>
+   </sidebarStyle>
  );
 }
