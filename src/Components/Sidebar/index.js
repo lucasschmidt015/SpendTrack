@@ -30,7 +30,7 @@ export default function Sidebar() {
 
   const handleChangePage = (page) => {
     dispatch(setActivePage(page))
-    // nav(`/${page}`);
+    nav(`/${page}`);
   }
 
  return (
@@ -42,7 +42,7 @@ export default function Sidebar() {
           <MdDashboard/>
           <p>Dashboard</p>         
         </ButtomModule>
-        <ButtomModule active={sidebarInfo === 'status'} showDescription={showDescription} id='status' onClick={() => handleChangePage('status')}>
+        <ButtomModule active={sidebarInfo === 'finances'} showDescription={showDescription} id='status' onClick={() => handleChangePage('finances')}>
           <AiFillDollarCircle/>
           <p>Status</p>         
         </ButtomModule>
