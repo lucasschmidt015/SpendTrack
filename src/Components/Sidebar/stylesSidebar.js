@@ -9,6 +9,14 @@ export const SidebarContainer = styled.div`
     flex-direction: column;
     transition: ease 0.2s;
     position: fixed;
+    z-index: 10;
+
+    @media screen and (max-width: 600px) {
+       height: 60px;
+       width: 100%;
+       flex-direction: row; 
+       bottom: 0;
+    }
 `;
 
 
@@ -30,6 +38,10 @@ export const ButtomHide = styled.div`
     svg:hover{
         font-size: 25px;
         cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px) {
+        display: none;
     }
 `;
 
@@ -62,5 +74,15 @@ export const ButtomModule = styled.div`
         position: absolute;
         left: 80px; 
         display: ${props => props.showDescription ? 'block' : 'none'};
+    }
+
+    @media screen and (max-width: 600px) {
+        height: 100%;
+        width: 60px;
+
+        &:last-child {
+            margin-top: 0;
+            margin-left: calc(100% - 50px - 50px - 50px - 50px - 100px);
+        }
     }
 `;
