@@ -10,6 +10,7 @@ export const SidebarContainer = styled.div`
     transition: ease 0.2s;
     position: fixed;
     z-index: 10;
+    border: ${props => props.showDescription ? '1px solid black' : 'none'};
 
     @media screen and (max-width: 600px) {
        height: 60px;

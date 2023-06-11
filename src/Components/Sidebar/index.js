@@ -29,6 +29,9 @@ export default function Sidebar() {
   }
 
   const handleChangePage = (page) => {
+    if (page !== 'finances' && page !== 'home')
+      return;
+
     dispatch(setActivePage(page))
     nav(`/${page}`);
   }
@@ -42,9 +45,9 @@ export default function Sidebar() {
           <MdDashboard/>
           <p>Dashboard</p>         
         </ButtomModule>
-        <ButtomModule active={sidebarInfo === 'finances'} showDescription={showDescription} id='status' onClick={() => handleChangePage('finances')}>
+        <ButtomModule active={sidebarInfo === 'finances'} showDescription={showDescription} id='finances' onClick={() => handleChangePage('finances')}>
           <AiFillDollarCircle/>
-          <p>Status</p>         
+          <p>Finances</p>         
         </ButtomModule>
         <ButtomModule active={sidebarInfo === 'report'} showDescription={showDescription} id='report' onClick={() => handleChangePage('report')}>
           <BsFillFileBarGraphFill/>
