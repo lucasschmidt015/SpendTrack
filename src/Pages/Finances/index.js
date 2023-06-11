@@ -3,6 +3,9 @@ import React from 'react';
 import { FinancesContainer, RemainingAreaFinances, Earnings, Expenses, GridExpenses } from './styles';
 import Sidebar from '../../Components/Sidebar';
 
+import { FaTrash } from 'react-icons/fa';
+import { AiFillEdit } from 'react-icons/ai';
+
 export default function Finances() {
  return (
   <FinancesContainer>
@@ -22,19 +25,20 @@ export default function Finances() {
           <GridExpenses>
             <table>
               <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>#</th>
+                <th id = 'firstH'>Id</th>
+                <th id = 'secondH'>Type</th>
+                <th id = 'thirdH'>Date</th>
+                <th id = 'fourthH'>Description</th>
+                <th id = 'fifthH'>#</th>
               </tr>
               <tr>
-                <td>123</td>
-                <td>Test</td>
-                <td>15/02/2002</td>
-                <td>Bla bla bla...</td>
-                <div id='buttons-grid'>
-                  
+                <td id = 'firstR'>123</td>
+                <td id = 'secondR'>Test</td>
+                <td id = 'thirdR'>15/02/2002</td>
+                <td id = 'fourthR'>Bla bla bla...</td>
+                <div id = 'buttons-grid'>
+                  <AiFillEdit/>
+                  <FaTrash/>
                 </div>
               </tr>
             </table>

@@ -95,6 +95,89 @@ export const GridExpenses = styled.div`
     height: 710px;
 
     table {
-        
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        tr:first-child {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            background-color: #141111;
+
+            #firstH {
+                width: 5%;
+                padding-left: 10px;
+            }
+
+            #secondH {
+                padding-left: 42px;
+                width: 20%;
+                text-align: start;
+            }
+
+            #thirdH {
+                width: 15%;
+                padding-left: 6px;
+                text-align: start;
+            }
+
+            #fourthH {
+                width: 50%;
+                padding-left: 2px;
+                text-align: start;
+            }
+
+            #fifthH {
+                width: 9%;
+                padding-left: 60px
+            }
+        }
+
+        tr {
+            width: 99%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            background-color: #1F1D1D;
+            border-radius: 7px;
+
+            #firstR {
+                width: 5%;
+                text-align: center;
+            }
+
+            #secondR {
+                padding-left: 35px;
+                width: 20%;
+                text-align: start;
+            }
+
+            #thirdR {
+                width: 15%;
+                text-align: start;
+            }
+
+            #fourthR {
+                width: 50%;
+                text-align: start;
+            }
+
+            #buttons-grid{
+                width: 9%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: end;
+                padding-left: 60px;
+                font-size: 18px;
+
+                svg {
+                    margin-right: 10px
+                }
+            }
+        }
     }
 `;
