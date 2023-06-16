@@ -93,12 +93,31 @@ export const GridExpenses = styled.div`
     border-radius: 7px;
     background-color: #141111;
     height: 710px;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+        width: 10px
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #141111;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #1F1D1D;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #1F1D1D;
+    }
 
     table {
         width: 100%;
         display: flex;
         align-items: center;
         flex-direction: column;
+        table-layout: fixed;
 
         tr:first-child {
             width: 100%;
@@ -143,6 +162,7 @@ export const GridExpenses = styled.div`
             align-items: center;
             background-color: #1F1D1D;
             border-radius: 7px;
+            margin-top: 4px;
 
             #firstR {
                 width: 5%;
@@ -176,6 +196,11 @@ export const GridExpenses = styled.div`
 
                 svg {
                     margin-right: 10px
+                }
+
+                svg:hover {
+                    transform: scale(1.2);
+                    color: #6f0df0;
                 }
             }
         }
