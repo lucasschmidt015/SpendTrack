@@ -4,25 +4,21 @@ import "./Home.css"
 import Sidebar from '../../Components/Sidebar';
 import Objectives from '../Objectives';
 
-import { MdOutlineFilterList } from 'react-icons/md';
 import { useState } from 'react';
+import numeral from 'numeral';
+
+import { MdOutlineFilterList } from 'react-icons/md';
 import { FaTrash } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
 
+import { getRealTimeData } from '../../Utils/GeneralFirebase';
+
 export default function Home() {
 
-  const obj = [
-    {id: 1, title: 'São Fransisco', percentageAchieved: '50%', valueAchieved: 'R$ 6.000,00', valueObjective: 'R$ 12.000,00'},
-    {id: 2, title: 'Los Anjeles', percentageAchieved: '12%', valueAchieved: 'R$ 2.400,00', valueObjective: 'R$ 20.000,00'},
-    {id: 3, title: 'Londres', percentageAchieved: '100%', valueAchieved: 'R$ 10.000,00', valueObjective: 'R$ 10.000,00'},
-    {id: 4, title: 'Suiça', percentageAchieved: '100%', valueAchieved: 'R$ 10.000,00', valueObjective: 'R$ 10.000,00'},
-    {id: 5, title: 'Tokyo', percentageAchieved: '100%', valueAchieved: 'R$ 10.000,00', valueObjective: 'R$ 10.000,00'},
-    {id: 6, title: 'Toronto', percentageAchieved: '100%', valueAchieved: 'R$ 10.000,00', valueObjective: 'R$ 10.000,00'},
-    {id: 7, title: 'Budapest', percentageAchieved: '100%', valueAchieved: 'R$ 10.000,00', valueObjective: 'R$ 10.000,00'},
-  ]
-
-  const [objectives, setObjectives] = useState(obj);
+  const [objectives, setObjectives] = useState([]);
   const [showObejectiveScreen, setShowObjectiveScreen] = useState(false);
+
+  getRealTimeData('Objectives', setObjectives, true);
 
   const handleNew = () => {
     setShowObjectiveScreen(!showObejectiveScreen);
@@ -56,13 +52,13 @@ export default function Home() {
               <div className='render-area-obejectives'>
                 {objectives.map((object) => {
                   return(
-                    <div className='objectives' key={object.id}>
+                    <div className='objectives' key={object.uid}>
                       <p id='Title'>{object.title}</p>
-                      <p id='Percent'>{object.percentageAchieved}</p>
-                      <p id='Achieved'>{object.valueAchieved}  /  {object.valueObjective}</p>
+                      <p id='Percent'>{object.percentageAchieved}%</p>
+                      <p id='Achieved'>R$ {numeral(object.achievedValue).format('0,0.00')}  /  R$ {numeral(object.totalValue).format('0,0.00')}</p>
                       <div className='options-buttons'>
-                        <AiFillEdit onClick={() => handleEdit(object.id)}/>
-                        <FaTrash onClick={() => handleDelete(object.id)}/>
+                        <AiFillEdit onClick={() => handleEdit(object.uid)}/>
+                        <FaTrash onClick={() => handleDelete(object.uid)}/>
                       </div>
                     </div>
                   );
