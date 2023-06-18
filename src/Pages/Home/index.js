@@ -11,7 +11,8 @@ import { MdOutlineFilterList } from 'react-icons/md';
 import { FaTrash } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
 
-import { getRealTimeData } from '../../Utils/GeneralFirebase';
+import { getRealTimeData, deleteDataById } from '../../Utils/GeneralFirebase';
+import { toast } from 'react-toastify';
 
 export default function Home() {
 
@@ -28,8 +29,14 @@ export default function Home() {
     console.log(`ID: ${id}`);
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     console.log(`ID: ${id}`);
+    const response = await deleteDataById('Objectives', id);
+
+    if (response)
+      toast.success('Deleted successfully!');
+    else
+      toast.warn('Something went wrong!');
   }
 
  return (

@@ -1,5 +1,5 @@
 import { webDB, auth } from "../Services/FirebaseConnection";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 
 /**
  * This funciton sends data to the database generating an automatic id
@@ -25,7 +25,6 @@ export const sendDataAutoID = async (collectionName, data) => {
 export const getUserUid = () => {
     return auth.currentUser.uid;
 }
-
 
 /**
  * This function will fetch data in real time from some database table
@@ -55,6 +54,17 @@ export const getRealTimeData = async (collectionName, setState, sortDate = false
     })
 }
 
+/**
+ * This function will delete database data
+ * @param {*} collection 
+ * @param {*} docUid 
+ * @returns 
+ */
 export const deleteDataById = async (collection, docUid) => {
-
+    try{
+        await deleteDoc(doc(webDB, collection, docUid))
+        return true;
+    } catch (error) {
+        return false;
+    }
 }
