@@ -1,5 +1,5 @@
 import { webDB, auth } from "../Services/FirebaseConnection";
-import { collection, addDoc, onSnapshot, doc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, deleteDoc, getDocs, query, orderBy, getDoc, updateDoc } from "firebase/firestore";
 
 /**
  * This funciton sends data to the database generating an automatic id
@@ -24,6 +24,44 @@ export const sendDataAutoID = async (collectionName, data) => {
  */
 export const getUserUid = () => {
     return auth.currentUser.uid;
+}
+
+/**
+ * This function will data from database an set it for a state
+ * @param {string} collectionName The name of the collection in the database
+ * @param {function} setState Pass here the function that will change the state of the component that stores the fetched data
+ * @param {boolean} sortDate Parameter option to order data by insertion date
+ */
+export const getFullData = async (collectionName, setState, sortDate = false) => {
+    try {
+        const list = [];
+        const q = sortDate ? query(collection(webDB, collectionName), orderBy('date', 'desc')) :   query(collection(webDB, collectionName))
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            list.push({
+                uid: doc.id,
+                ...doc.data()
+            })
+        })
+        setState(list);
+    } catch (error) {
+        console.log('deu algum BO');
+    }
+}
+
+/**
+ * This function returns a specific document of a collection
+ * @param {string} collectionName - The name of the collection in the database
+ * @param {string} id  - Doc id to edit
+ * @returns This function returns a object with the data finded of the document or null if does't find nothing
+ */
+export const getSpecificData = async (collectionName, id) => {
+    try{
+        const response = await getDoc(doc(webDB, collectionName, id))    
+        return response.data();
+    } catch (error) {
+        return null;
+    }
 }
 
 /**
@@ -53,12 +91,21 @@ export const getRealTimeData = async (collectionName, setState, sortDate = false
         setState(list);
     })
 }
+/**
+ * This function will update a specific doc in a collection
+ * @param {string} collectionName The name of the collection in the database
+ * @param {string} id The id of the doc that needs to be updated
+ * @param {object} data A object with the updated datas
+ */
+const updateData = async (collectionName, id, data) => {
+    
+}
 
 /**
  * This function will delete database data
- * @param {*} collection 
- * @param {*} docUid 
- * @returns 
+ * @param {string} collection 
+ * @param {string} docUid 
+ * @returns This function returns true if successful and false if unsuccessful
  */
 export const deleteDataById = async (collection, docUid) => {
     try{

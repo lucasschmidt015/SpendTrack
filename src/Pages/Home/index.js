@@ -4,33 +4,36 @@ import "./Home.css"
 import Sidebar from '../../Components/Sidebar';
 import Objectives from '../Objectives';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import numeral from 'numeral';
 
 import { MdOutlineFilterList } from 'react-icons/md';
 import { FaTrash } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
 
-import { getRealTimeData, deleteDataById } from '../../Utils/GeneralFirebase';
+import { getRealTimeData, deleteDataById, getFullData } from '../../Utils/GeneralFirebase';
 import { toast } from 'react-toastify';
 
 export default function Home() {
 
   const [objectives, setObjectives] = useState([]);
   const [showObejectiveScreen, setShowObjectiveScreen] = useState(false);
+  const [editId, setEditId] = useState(null);
 
-  getRealTimeData('Objectives', setObjectives, true);
+  useEffect(() => {
+    getFullData('Objectives', setObjectives, true);
+  }, []);
 
   const handleNew = () => {
     setShowObjectiveScreen(!showObejectiveScreen);
   }
 
   const handleEdit = (id) => {
-    console.log(`ID: ${id}`);
+    setEditId(id);
+    setShowObjectiveScreen(true);
   }
 
   const handleDelete = async (id) => {
-    console.log(`ID: ${id}`);
     const response = await deleteDataById('Objectives', id);
 
     if (response)
@@ -90,7 +93,7 @@ export default function Home() {
           </div>
         </div>
         {showObejectiveScreen && (
-          <Objectives funcClose = {handleNew}/>
+          <Objectives funcClose = {handleNew} editId = {editId} funcClearId = {setEditId}/>
         )}
         
    </div>

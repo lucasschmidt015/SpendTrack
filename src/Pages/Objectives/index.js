@@ -1,34 +1,61 @@
 import React from 'react';
 import './Objectives.css'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { sendDataAutoID, getUserUid } from '../../Utils/GeneralFirebase';
 
-export default function Objectives({ funcClose }) {
+import { getSpecificData } from '../../Utils/GeneralFirebase';
+
+export default function Objectives({ funcClose, editId, funcClearId }) {
 
     const [title, setTitle] = useState('');
     const [totalValue, setTotalValue] = useState('');
     const [achievedValue, setAchievedValue] = useState('');
     const [description, setDescription] = useState('');
 
-    const handleNewObjective = async () => {
-        const userUid = getUserUid();
-        const response = await sendDataAutoID('Objectives', {
-            userUid: userUid,
-            title: title,
-            percentageAchieved: calcAchievedPercentage(achievedValue, totalValue),
-            totalValue: parseFloat(totalValue),
-            achievedValue: parseFloat(achievedValue),
-            description: description,
-        })
-
-        if (response){
-            toast.success("Registered successfully!");
-            funcClose();
-        } else {
-            toast.warn("Something went wrong!");
+    useEffect(() => {
+        const getEditingData  = async () => {
+            if (editId !== null) {
+                const response = await getSpecificData('Objectives', editId);
+                setTitle(response.title);
+                setTotalValue(response.totalValue);
+                setAchievedValue(response.achievedValue);
+                setDescription(response.description);
+            }
         }
+
+        getEditingData();
+    }, []);
+
+    const handleNewObjective = async () => {
+        if (editId){
+            //Call here the function to update datas, It is on the GeneralFirebase file;
+        } else {
+            const userUid = getUserUid();
+            const response = await sendDataAutoID('Objectives', {
+                userUid: userUid,
+                title: title,
+                percentageAchieved: calcAchievedPercentage(achievedValue, totalValue),
+                totalValue: parseFloat(totalValue),
+                achievedValue: parseFloat(achievedValue),
+                description: description,
+            })
+            if (response){
+                toast.success("Registered successfully!");
+                funcClose();
+            } else {
+                toast.warn("Something went wrong!");
+            }
+        }
+
+        funcClearId(null);
+        
+    }
+
+    const handleCancel = () => {
+        funcClearId(null);
+        funcClose();
     }
 
     const calcAchievedPercentage = (achievedValue, totalValue) => {
@@ -39,7 +66,7 @@ export default function Objectives({ funcClose }) {
         <div className='Objectives-Container'>
             <div className='formObjectives'>
                 <div className='primeira-linha-objectives'>
-                    <h1>New Objective</h1>
+                    <h1>{editId !== null ? 'Edit' : 'New'} Objective</h1>
                 </div>
                 <div className='input-area-objectives'>
                     <input placeholder='Title'
@@ -64,7 +91,7 @@ export default function Objectives({ funcClose }) {
                     />
                 </div>
                 <div className='submit-button-objective'>
-                    <button onClick={funcClose}>Cencel</button>
+                    <button onClick={() => handleCancel()}>Cencel</button>
                     <button onClick={() => handleNewObjective()}>Seve</button>
                 </div>
             </div>
