@@ -1,5 +1,5 @@
 import { webDB, auth } from "../Services/FirebaseConnection";
-import { collection, addDoc, onSnapshot, doc, deleteDoc, getDocs, query, orderBy, getDoc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, deleteDoc, getDocs, query, where, orderBy, getDoc, updateDoc } from "firebase/firestore";
 
 /**
  * This funciton sends data to the database generating an automatic id
@@ -35,7 +35,8 @@ export const getUserUid = () => {
 export const getFullData = async (collectionName, setState, sortDate = false) => {
     try {
         const list = [];
-        const q = sortDate ? query(collection(webDB, collectionName), orderBy('date', 'desc')) :   query(collection(webDB, collectionName))
+        const userUid = getUserUid();
+        const q = sortDate ? query(collection(webDB, collectionName), where("userUid", "==", userUid), orderBy('date', 'desc')) :   query(collection(webDB, collectionName), where("userUid", "==", userUid))
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
             list.push({
@@ -45,7 +46,7 @@ export const getFullData = async (collectionName, setState, sortDate = false) =>
         })
         setState(list);
     } catch (error) {
-        console.log('deu algum BO');
+        console.log(`Deu algum BO ${error}`);
     }
 }
 
@@ -96,9 +97,16 @@ export const getRealTimeData = async (collectionName, setState, sortDate = false
  * @param {string} collectionName The name of the collection in the database
  * @param {string} id The id of the doc that needs to be updated
  * @param {object} data A object with the updated datas
+ * @returns This function returns true if successful and false if unsuccessful
  */
-const updateData = async (collectionName, id, data) => {
-    
+export const updateData = async (collectionName, id, data) => {
+    try{
+        const docRef = doc(webDB, collectionName, id);
+        await updateDoc(docRef, data);
+        return true;
+    } catch (error) {
+        return false;
+    }
 }
 
 /**

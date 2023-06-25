@@ -3,9 +3,8 @@ import './Objectives.css'
 
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { sendDataAutoID, getUserUid } from '../../Utils/GeneralFirebase';
 
-import { getSpecificData } from '../../Utils/GeneralFirebase';
+import { sendDataAutoID, getUserUid, getSpecificData, updateData } from '../../Utils/GeneralFirebase';
 
 export default function Objectives({ funcClose, editId, funcClearId }) {
 
@@ -26,21 +25,35 @@ export default function Objectives({ funcClose, editId, funcClearId }) {
         }
 
         getEditingData();
-    }, []);
+    }, [editId]);
 
     const handleNewObjective = async () => {
+
+        if (title === '' || totalValue === '' || achievedValue === ''){
+            toast.warn('You need to fill in all the fields.')
+            return;
+        }
+
+        const userUid = getUserUid();
+        const dataObject = {
+            userUid: userUid,
+            title: title,
+            percentageAchieved: calcAchievedPercentage(achievedValue, totalValue),
+            totalValue: parseFloat(totalValue),
+            achievedValue: parseFloat(achievedValue),
+            description: description,
+        }
+
         if (editId){
-            //Call here the function to update datas, It is on the GeneralFirebase file;
+            const response = await updateData('Objectives', editId, dataObject);
+            if (response) {
+                toast.success("Updated successfully!");
+                funcClose();
+            } else {
+                toast.warn("Something went wrong!");
+            }
         } else {
-            const userUid = getUserUid();
-            const response = await sendDataAutoID('Objectives', {
-                userUid: userUid,
-                title: title,
-                percentageAchieved: calcAchievedPercentage(achievedValue, totalValue),
-                totalValue: parseFloat(totalValue),
-                achievedValue: parseFloat(achievedValue),
-                description: description,
-            })
+            const response = await sendDataAutoID('Objectives', dataObject)
             if (response){
                 toast.success("Registered successfully!");
                 funcClose();
@@ -48,7 +61,7 @@ export default function Objectives({ funcClose, editId, funcClearId }) {
                 toast.warn("Something went wrong!");
             }
         }
-
+        //Colocar aqui uma verificação pra ver se foi success
         funcClearId(null);
         
     }

@@ -11,7 +11,7 @@ import { MdOutlineFilterList } from 'react-icons/md';
 import { FaTrash } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
 
-import { getRealTimeData, deleteDataById, getFullData } from '../../Utils/GeneralFirebase';
+import { deleteDataById, getFullData } from '../../Utils/GeneralFirebase';
 import { toast } from 'react-toastify';
 
 export default function Home() {
@@ -19,10 +19,11 @@ export default function Home() {
   const [objectives, setObjectives] = useState([]);
   const [showObejectiveScreen, setShowObjectiveScreen] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [needUpdate, setNeedUpdate] = useState(false);
 
   useEffect(() => {
     getFullData('Objectives', setObjectives, true);
-  }, []);
+  }, [showObejectiveScreen, needUpdate]);
 
   const handleNew = () => {
     setShowObjectiveScreen(!showObejectiveScreen);
@@ -36,8 +37,10 @@ export default function Home() {
   const handleDelete = async (id) => {
     const response = await deleteDataById('Objectives', id);
 
-    if (response)
+    if (response){
       toast.success('Deleted successfully!');
+      setNeedUpdate(!needUpdate);
+    }
     else
       toast.warn('Something went wrong!');
   }
