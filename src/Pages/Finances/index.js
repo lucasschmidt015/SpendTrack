@@ -14,25 +14,25 @@ export default function Finances() {
   const [activeNewExpenseScreen, setNewExpenseScreen] = useState(false);
 
   const [expenses, setExpenses] = useState([
-    {Id: '1', Type: 'Teste', Date: '15/02/2002', Description: 'Bla bla bla...'},
-    {Id: '2', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '3', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '4', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '5', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '6', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '7', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '8', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '9', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '10', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '11', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '12', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '13', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '14', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '15', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '16', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '17', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '18', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
-    {Id: '19', Type: 'Teste2', Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '1', Type: 'Teste', Value: 150.5 ,Date: '15/02/2002', Description: 'Bla bla bla...'},
+    {Id: '2', Type: 'Teste2' , Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '3', Type: 'Teste2' , Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '4', Type: 'Teste2' , Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '5', Type: 'Teste2', Value: 150.5  , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '6', Type: 'Teste2' , Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '7', Type: 'Teste2' , Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '8', Type: 'Teste2' , Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '9', Type: 'Teste2' , Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '10', Type: 'Teste2' , Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '11', Type: 'Teste2', Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '12', Type: 'Teste2', Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '13', Type: 'Teste2', Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '14', Type: 'Teste2', Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '15', Type: 'Teste2', Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '16', Type: 'Teste2', Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '17', Type: 'Teste2', Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '18', Type: 'Teste2', Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
+    {Id: '19', Type: 'Teste2', Value: 150.5 , Date: '16/05/2012', Description: 'Bla bla bla Fon...'},
   ]);
 
   const onClickNew = (id = null) => {
@@ -55,6 +55,8 @@ export default function Finances() {
     console.log(`Vai deletar o ID: ${id}`);
   }
 
+  // We need to put a column called Value here too
+
  return (
   <FinancesContainer>
       <Sidebar/>
@@ -76,6 +78,7 @@ export default function Finances() {
                 <th id = 'firstH'>Id</th>
                 <th id = 'secondH'>Type</th>
                 <th id = 'thirdH'>Date</th>
+                <th id = 'thirdH'>Value</th>
                 <th id = 'fourthH'>Description</th>
                 <th id = 'fifthH'>#</th>
               </tr>
@@ -87,6 +90,7 @@ export default function Finances() {
                     <td id = 'firstR'>{expense.Id}</td>
                     <td id = 'secondR'>{expense.Type}</td>
                     <td id = 'thirdR'>{expense.Date}</td>
+                    <td id = 'thirdR'>{expense.Value}</td>
                     <td id = 'fourthR'>{expense.Description}</td>
                     <div id = 'buttons-grid'>
                       <AiFillEdit onClick={() => onClickNew(expense.Id)}/>
